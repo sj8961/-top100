@@ -4,20 +4,10 @@ from pyquery import PyQuery as pq
 import time
 
 
-"""
-可以爬 10 个页面, 把所有 TOP100 电影都爬出来
-并且加入了缓存页面功能
-再也不用重复请求了(网络请求浪费时间)
-这样做有两个好处
-    1, 增加新内容(比如增加评论人数)的时候不用重复请求网络
-    2, 出错的时候有原始数据对照
-"""
 
 
 class Model():
-    """
-    基类, 用来显示类的信息
-    """
+
 
     def __repr__(self):
         name = self.__class__.__name__
@@ -27,9 +17,6 @@ class Model():
 
 
 class Movie(Model):
-    """
-    存储电影信息
-    """
 
     def __init__(self):
         self.name = ''
@@ -41,8 +28,7 @@ class Movie(Model):
 
 
 def log(*args, **kwargs):
-    # time.time() 返回 unix time
-    # 把 unix time 转换为可看懂的格式
+
     format = '%H:%M:%S'
     value = time.localtime(int(time.time()))
     dt = time.strftime(format, value)
@@ -53,10 +39,9 @@ def log(*args, **kwargs):
 
 def get(url, filename):
     """
-    缓存, 避免重复下载网页浪费时间
+    缓存
     """
-    folder = 'cached'
-    # 建立 cached 文件夹
+    folder = 'cache'
     if not os.path.exists(folder):
         os.makedirs(folder)
 
@@ -66,7 +51,7 @@ def get(url, filename):
             s = f.read()
             return s
     else:
-        # 发送网络请求, 把结果写入到文件夹中
+        # 发送网络请求
         r = requests.get(url)
         with open(path, 'wb') as f:
             f.write(r.content)
