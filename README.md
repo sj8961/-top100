@@ -5,3 +5,5 @@
 并且加入了缓存页面功能
 
 再也不用重复请求了
+
+![image](https://github.com/sj8961/mtime-top100/blob/master/gif/mtime.gif)
